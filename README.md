@@ -48,4 +48,6 @@ But the one down there can keep data in the RAM not use HDD, Time-consuming IO a
 &emsp;4. You also can use command "sox" to do convert. For me,it worked. I can implement vox file to wav file by use sox. But, the wav file's time domain waveform deviant. The center of the signal deviates from the zero axis as a whole. ~~I can't fixed.~~ Because the original Dialogic ADPCM algorithm is decode 4bit to 12bit, not 16bit. The "sox" use the default version.        
               
 &emsp;5. I also found some other [blog](http://lhari.hu/transcoding-in-freeswitch-from-dialogic-adpcm-to-g711/) or [issue](https://sourceforge.net/p/sox/bugs/274/) about Dialogic ADPCM. They are also very useful!
+                  
+&emsp;6. Dialogic ADPCM [algorithm](https://www.mp3-tech.org/programmer/docs/adpcm.pdf).
 
