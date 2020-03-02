@@ -29,7 +29,7 @@ Vox files are widely used in telephone recording system. I need deal with them b
 
 ---
 - Performance         
-![image](result.png)           
+![avatar](result.png)           
 The upper part is the result of .exe.           
 And the lower part is the result of python code.      
 They're not very different.        
