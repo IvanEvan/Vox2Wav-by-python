@@ -140,10 +140,24 @@ def ADPCM_Decode(code):
 
 
 # decode test: vox(dialogic ADPCM) to wav(PCM)
+# could use sox -t vox -r 6000 xxx.v3 xxx.wav
+# but as said in README: "The center of the signal deviates from the zero axis as a whole"
 if __name__ == '__main__':
-    vox_file = open('xxxx.vox', mode='rb')
-    list_8bit_bytes = vox_file.read()
-    vox_file.close()
+    import sys
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Convert a vox(dialogic ADPCM) to wav(PCM)")
+    parser.add_argument("samplerate", type=int,
+                        help="samplerate of source file");
+    parser.add_argument("voxfile", type=str,
+                        help="input vox file");
+    parser.add_argument("wavfile", type=str,
+                        help="output wav file");
+
+    args = parser.parse_args()
+
+    with open(args.voxfile, mode='rb') as vox_file:
+        list_8bit_bytes = vox_file.read()
 
     list_16bit = []
     for i in range(len(list_8bit_bytes)):
@@ -174,12 +188,11 @@ if __name__ == '__main__':
 
         list_16bit.extend([tmpDeS16_0, tmpDeS16_1])
 
-    wav_file = wave.open('xxxx.wav', 'wb')
-
+    wav_file = wave.open(args.wavfile, 'wb')
     # configure channel number, quantization size, and sample rate
     wav_file.setnchannels(1)
     wav_file.setsampwidth(2)
-    wav_file.setframerate(16000)
+    wav_file.setframerate(args.samplerate)
     # converts data to binary data and writes it to a file
     wav_file.writeframes(np.array(list_16bit, dtype=np.int16).tostring())
     wav_file.close()
