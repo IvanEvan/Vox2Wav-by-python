@@ -147,7 +147,7 @@ if __name__ == '__main__':
 
     list_16bit = []
     for i in range(len(list_8bit_bytes)):
-        byte_i = list_8bit_bytes[i]  # 1 bytes = 8bit
+        byte_i = ord(list_8bit_bytes[i])  # 1 bytes = 8bit
         high_4bit = (byte_i & 0xf0) >> 4  # split high 4bit from 8bit
         low_4bit = byte_i & 0x0f  # split low 4bit from 8bit
 
@@ -181,5 +181,5 @@ if __name__ == '__main__':
     wav_file.setsampwidth(2)
     wav_file.setframerate(16000)
     # converts data to binary data and writes it to a file
-    wav_file.writeframes(np.array(list_16bit).tostring())
+    wav_file.writeframes(np.array(list_16bit, dtype=np.int16).tostring())
     wav_file.close()
